@@ -20,30 +20,26 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
         initialize();
     }
 
-    // @Override
-    // public void run() {
-    // }
-
     @Override
     protected boolean initialize() {
-        // try {
-        // createStubAndBind();
-        // // registry = LocateRegistry.getRegistry();
-        // server = (RmiSendToClientRemoteInterface) registry
-        // .lookup("RmiToClientRemoteInterface");
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
+        try {
+            createStubAndBind();
+            // registry = LocateRegistry.getRegistry();
+            server = (RmiSendToClientRemoteInterface) registry
+                    .lookup("RmiToClientRemoteInterface");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
     @Override
     public void sendMessage(String mensagem) {
-        // try {
-        // server.messageToClient(mensagem);
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
+        try {
+            server.messageToClient(mensagem);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -53,11 +49,10 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
 
     public void createStubAndBind() throws RemoteException {
 
-        // RmiSendToServerRemoteInterface stub = (RmiSendToServerRemoteInterface)
-        // UnicastRemoteObject
-        // .exportObject((RmiSendToServerRemoteInterface) this, 0);
-        // registry = LocateRegistry.createRegistry(1099);
-        // registry.rebind("RmiToServerRemoteInterface", stub);
+        RmiSendToServerRemoteInterface stub = (RmiSendToServerRemoteInterface) UnicastRemoteObject
+                .exportObject((RmiSendToServerRemoteInterface) this, 0);
+        registry = LocateRegistry.createRegistry(1099);
+        registry.rebind("RmiToServerRemoteInterface", stub);
     }
 
     @Override

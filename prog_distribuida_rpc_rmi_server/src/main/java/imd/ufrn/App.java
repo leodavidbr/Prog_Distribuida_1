@@ -7,10 +7,9 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        while (true) {
-            Runnable chatController = new ChatController();
-            Thread chatContollerThread = new Thread(chatController);
-            chatContollerThread.start();
-        }
+        Runnable chatController = new ChatController();
+        Thread chatContollerThread = new Thread(chatController);
+        chatContollerThread.start();
+
     }
 }
