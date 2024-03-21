@@ -21,6 +21,10 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     }
 
     @Override
+    public void run() {
+    }
+
+    @Override
     protected boolean initialize() {
         try {
             createStubAndBind();
@@ -54,9 +58,4 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
         registry = LocateRegistry.createRegistry(1099);
         registry.rebind("RmiToServerRemoteInterface", stub);
     }
-
-    @Override
-    public void run() {
-    }
-
 }
