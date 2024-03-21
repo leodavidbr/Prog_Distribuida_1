@@ -17,7 +17,7 @@ public class ChatController {
     IChatPresenter chatPresenter;
 
     public ChatController() {
-        serverCommunicationController = new SocketCommunicationController(
+        serverCommunicationController = new ServerCommunicationRmiImpl(
                 serverMessage -> handleMessageRecievedFromServer(serverMessage));
         inputReceiver = new InputReceiverTerminalImpl(
                 message -> handleSendMessageFromClient(message));

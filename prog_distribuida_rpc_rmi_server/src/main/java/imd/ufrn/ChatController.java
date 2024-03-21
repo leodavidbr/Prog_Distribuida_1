@@ -16,10 +16,9 @@ public class ChatController implements Runnable {
     private BaseCommunicationWithClientController serverCommunicationController;
     Chat chatSession;
 
-    public ChatController(Socket clientSocket) {
-        serverCommunicationController = new SocketCommunicationController(
-                clientMessage -> handleMessageReceivedFromClient(clientMessage),
-                clientSocket);
+    public ChatController() {
+        serverCommunicationController = new ClientCommunicationRmiImpl(
+                clientMessage -> handleMessageReceivedFromClient(clientMessage));
     }
 
     public void initialize() {

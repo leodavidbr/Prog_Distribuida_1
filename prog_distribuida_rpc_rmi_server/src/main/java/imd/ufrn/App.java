@@ -12,8 +12,7 @@ public class App {
         serverSocket = new ServerSocket(PORT);
 
         while (true) {
-            Socket clientSocket = serverSocket.accept();
-            Runnable chatController = new ChatController(clientSocket);
+            Runnable chatController = new ChatController();
             Thread chatContollerThread = new Thread(chatController);
             chatContollerThread.start();
         }
