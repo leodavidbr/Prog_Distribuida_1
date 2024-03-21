@@ -27,9 +27,9 @@ public class ServerCommunicationRmiImpl extends BaseCommunicationWithServerContr
     @Override
     protected boolean initialize() {
         try {
-            createStubAndBind();
+            // createStubAndBind();
 
-            // registry = LocateRegistry.getRegistry();
+            registry = LocateRegistry.getRegistry(1099);
             server = (RmiSendToServerRemoteInterface) registry
                     .lookup("RmiToServerRemoteInterface");
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ServerCommunicationRmiImpl extends BaseCommunicationWithServerContr
     public void createStubAndBind() throws RemoteException {
         RmiSendToClientRemoteInterface stub = (RmiSendToClientRemoteInterface) UnicastRemoteObject
                 .exportObject((RmiSendToClientRemoteInterface) this, 0);
-        registry = LocateRegistry.getRegistry();
+        registry = LocateRegistry.getRegistry("192.168.1.2", 0);
         registry.rebind("RmiToClientRemoteInterface", stub);
     }
 

@@ -1,7 +1,6 @@
 package imd.ufrn;
 
 import java.io.File;
-import java.net.Socket;
 
 import org.alicebot.ab.Bot;
 import org.alicebot.ab.Chat;
@@ -13,12 +12,12 @@ import imd.ufrn.interfaces.BaseCommunicationWithClientController;
 
 public class ChatController implements Runnable {
     private static final boolean TRACE_MODE = false;
-    private BaseCommunicationWithClientController serverCommunicationController;
+    private BaseCommunicationWithClientController clientCommunicationController;
     Chat chatSession;
 
-    public ChatController(Socket clientSocket) {
+    public ChatController() {
         try {
-            serverCommunicationController = new ClientCommunicationRmiImpl(
+            clientCommunicationController = new ClientCommunicationRmiImpl(
                     clientMessage -> handleMessageReceivedFromClient(clientMessage));
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,7 +36,7 @@ public class ChatController implements Runnable {
     public void run() {
         this.initialize();
 
-        serverCommunicationController.run();
+        clientCommunicationController.run();
     }
 
     private static String getResourcesPath() {
@@ -50,7 +49,7 @@ public class ChatController implements Runnable {
     }
 
     public void handleSendMessageFromServer(String serverMessage) {
-        serverCommunicationController.sendMessage(serverMessage);
+        clientCommunicationController.sendMessage(serverMessage);
     }
 
     public void handleMessageReceivedFromClient(String clientMessage) {

@@ -18,6 +18,7 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     public ClientCommunicationRmiImpl(Consumer<String> callbackFunctionMessageReceived) throws RemoteException {
         super(callbackFunctionMessageReceived);
         initialize();
+        System.out.println("communication initialized");
     }
 
     @Override
@@ -27,10 +28,11 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     @Override
     protected boolean initialize() {
         try {
+            // System.setProperty("java.rmi.server.hostname", "192.168.1.2");
             createStubAndBind();
             // registry = LocateRegistry.getRegistry();
-            server = (RmiSendToClientRemoteInterface) registry
-                    .lookup("RmiToClientRemoteInterface");
+            // server = (RmiSendToClientRemoteInterface) registry
+            // .lookup("RmiToClientRemoteInterface");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,13 +50,15 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
 
     @Override
     public void messageToServer(String message) throws RemoteException {
-        this.callbackFunctionMessageReceived.accept(message);
+        // this.callbackFunctionMessageReceived.accept(message);
+        System.out.println("client said: " + message);
     }
 
     public void createStubAndBind() throws RemoteException {
 
         RmiSendToServerRemoteInterface stub = (RmiSendToServerRemoteInterface) UnicastRemoteObject
                 .exportObject((RmiSendToServerRemoteInterface) this, 0);
+        System.out.println("run");
         registry = LocateRegistry.createRegistry(1099);
         registry.rebind("RmiToServerRemoteInterface", stub);
     }
