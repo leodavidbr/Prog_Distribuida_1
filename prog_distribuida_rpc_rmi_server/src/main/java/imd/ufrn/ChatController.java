@@ -17,9 +17,12 @@ public class ChatController implements Runnable {
     Chat chatSession;
 
     public ChatController(Socket clientSocket) {
-        serverCommunicationController = new SocketCommunicationController(
-                clientMessage -> handleMessageReceivedFromClient(clientMessage),
-                clientSocket);
+        try {
+            serverCommunicationController = new ClientCommunicationRmiImpl(
+                    clientMessage -> handleMessageReceivedFromClient(clientMessage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void initialize() {
