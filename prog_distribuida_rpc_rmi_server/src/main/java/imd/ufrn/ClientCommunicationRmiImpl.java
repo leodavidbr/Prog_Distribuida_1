@@ -7,13 +7,17 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.function.Consumer;
 
 import imd.ufrn.interfaces.BaseCommunicationWithClientController;
-import imd.ufrn.interfaces.RmiRemoteInterface;
+import imd.ufrn.interfaces.RmiSendToClientRemoteInterface;
+import imd.ufrn.interfaces.RmiSendToServerRemoteInterface;
 
-public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientController implements RmiRemoteInterface {
+public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientController
+        implements RmiSendToServerRemoteInterface {
+    private Registry registry;
+    private RmiSendToClientRemoteInterface server;
 
     public ClientCommunicationRmiImpl(Consumer<String> callbackFunctionMessageReceived) throws RemoteException {
         super(callbackFunctionMessageReceived);
-        createStubAndBind();
+        initialize();
     }
 
     // @Override
@@ -22,23 +26,42 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
 
     @Override
     protected boolean initialize() {
+        // try {
+        // createStubAndBind();
+        // // registry = LocateRegistry.getRegistry();
+        // server = (RmiSendToClientRemoteInterface) registry
+        // .lookup("RmiToClientRemoteInterface");
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // }
         return true;
     }
 
     @Override
     public void sendMessage(String mensagem) {
+        // try {
+        // server.messageToClient(mensagem);
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // }
     }
 
     @Override
-    public String getMessage(String message) throws RemoteException {
-        return "Hello World";
+    public void messageToServer(String message) throws RemoteException {
+        this.callbackFunctionMessageReceived.accept(message);
     }
 
     public void createStubAndBind() throws RemoteException {
 
-        RmiRemoteInterface stub = (RmiRemoteInterface) UnicastRemoteObject.exportObject((RmiRemoteInterface) this, 0);
-        Registry registry = LocateRegistry.createRegistry(1099);
-        registry.rebind("RmiRemoteInterface", stub);
+        // RmiSendToServerRemoteInterface stub = (RmiSendToServerRemoteInterface)
+        // UnicastRemoteObject
+        // .exportObject((RmiSendToServerRemoteInterface) this, 0);
+        // registry = LocateRegistry.createRegistry(1099);
+        // registry.rebind("RmiToServerRemoteInterface", stub);
+    }
+
+    @Override
+    public void run() {
     }
 
 }

@@ -1,7 +1,6 @@
 package imd.ufrn;
 
 import java.io.File;
-import java.net.Socket;
 
 import org.alicebot.ab.Bot;
 import org.alicebot.ab.Chat;
@@ -37,7 +36,7 @@ public class ChatController implements Runnable {
     public void run() {
         this.initialize();
 
-        // serverCommunicationController.run();
+        serverCommunicationController.run();
     }
 
     private static String getResourcesPath() {
