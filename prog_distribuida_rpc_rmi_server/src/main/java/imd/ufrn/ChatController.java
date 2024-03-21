@@ -17,8 +17,12 @@ public class ChatController implements Runnable {
     Chat chatSession;
 
     public ChatController() {
-        serverCommunicationController = new ClientCommunicationRmiImpl(
-                clientMessage -> handleMessageReceivedFromClient(clientMessage));
+        try {
+            serverCommunicationController = new ClientCommunicationRmiImpl(
+                    clientMessage -> handleMessageReceivedFromClient(clientMessage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void initialize() {
@@ -33,7 +37,7 @@ public class ChatController implements Runnable {
     public void run() {
         this.initialize();
 
-        serverCommunicationController.run();
+        // serverCommunicationController.run();
     }
 
     private static String getResourcesPath() {
