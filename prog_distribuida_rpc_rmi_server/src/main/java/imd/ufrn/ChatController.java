@@ -1,6 +1,7 @@
 package imd.ufrn;
 
 import java.io.File;
+import java.net.Socket;
 
 import org.alicebot.ab.Bot;
 import org.alicebot.ab.Chat;
@@ -15,13 +16,10 @@ public class ChatController implements Runnable {
     private BaseCommunicationWithClientController serverCommunicationController;
     Chat chatSession;
 
-    public ChatController() {
-        try {
-            serverCommunicationController = new ClientCommunicationRmiImpl(
-                    clientMessage -> handleMessageReceivedFromClient(clientMessage));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public ChatController(Socket clientSocket) {
+        serverCommunicationController = new SocketCommunicationController(
+                clientMessage -> handleMessageReceivedFromClient(clientMessage),
+                clientSocket);
     }
 
     public void initialize() {
