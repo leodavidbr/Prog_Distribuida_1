@@ -4,5 +4,5 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface RmiSendToServerRemoteInterface extends Remote {
-    public void messageToServer(String message) throws RemoteException;
+    public String messageToServer(String message) throws RemoteException;
 }

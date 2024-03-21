@@ -52,7 +52,8 @@ public class ChatController implements Runnable {
         clientCommunicationController.sendMessage(serverMessage);
     }
 
-    public void handleMessageReceivedFromClient(String clientMessage) {
+    public String handleMessageReceivedFromClient(String clientMessage) {
+        String response = "";
         if ((clientMessage == null) || (clientMessage.length() < 1))
             clientMessage = MagicStrings.null_input;
         if (clientMessage.equals("::EXIT")) {
@@ -63,13 +64,13 @@ public class ChatController implements Runnable {
                 System.out.println(
                         "STATE=" + request + ":THAT=" + ((History<?>) chatSession.thatHistory.get(0)).get(0)
                                 + ":TOPIC=" + chatSession.predicates.get("topic"));
-            String response = chatSession.multisentenceRespond(request);
+            response = chatSession.multisentenceRespond(request);
             while (response.contains("&lt;"))
                 response = response.replace("&lt;", "<");
             while (response.contains("&gt;"))
                 response = response.replace("&gt;", ">");
 
-            handleSendMessageFromServer(response);
         }
+        return response;
     }
 }

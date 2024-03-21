@@ -1,6 +1,6 @@
 package imd.ufrn.interfaces;
 
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 // offers the sendMessage method and 
 // calls the callbackFunctionMessageReceived function when a 
@@ -8,9 +8,9 @@ import java.util.function.Consumer;
 // has to be initialized before use.
 public abstract class BaseCommunicationWithClientController implements Runnable {
 
-    protected Consumer<String> callbackFunctionMessageReceived;
+    protected Function<String, String> callbackFunctionMessageReceived;
 
-    public BaseCommunicationWithClientController(Consumer<String> callbackFunctionMessageReceived) {
+    public BaseCommunicationWithClientController(Function<String, String> callbackFunctionMessageReceived) {
         this.callbackFunctionMessageReceived = callbackFunctionMessageReceived;
     }
 

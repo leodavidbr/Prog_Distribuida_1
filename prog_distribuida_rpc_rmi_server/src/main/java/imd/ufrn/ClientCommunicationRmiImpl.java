@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 import imd.ufrn.interfaces.BaseCommunicationWithClientController;
 import imd.ufrn.interfaces.RmiSendToClientRemoteInterface;
@@ -15,7 +15,7 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     private Registry registry;
     private RmiSendToClientRemoteInterface server;
 
-    public ClientCommunicationRmiImpl(Consumer<String> callbackFunctionMessageReceived) throws RemoteException {
+    public ClientCommunicationRmiImpl(Function<String, String> callbackFunctionMessageReceived) throws RemoteException {
         super(callbackFunctionMessageReceived);
         initialize();
         System.out.println("communication initialized");
@@ -28,11 +28,7 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     @Override
     protected boolean initialize() {
         try {
-            // System.setProperty("java.rmi.server.hostname", "192.168.1.2");
             createStubAndBind();
-            // registry = LocateRegistry.getRegistry();
-            // server = (RmiSendToClientRemoteInterface) registry
-            // .lookup("RmiToClientRemoteInterface");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,9 +45,11 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     }
 
     @Override
-    public void messageToServer(String message) throws RemoteException {
-        // this.callbackFunctionMessageReceived.accept(message);
+    public String messageToServer(String message) throws RemoteException {
         System.out.println("client said: " + message);
+        String botResponse = this.callbackFunctionMessageReceived.apply(message);
+        System.out.println("botSaid" + botResponse);
+        return botResponse;
     }
 
     public void createStubAndBind() throws RemoteException {

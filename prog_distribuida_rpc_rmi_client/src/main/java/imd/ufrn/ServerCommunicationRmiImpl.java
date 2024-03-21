@@ -42,7 +42,8 @@ public class ServerCommunicationRmiImpl extends BaseCommunicationWithServerContr
     @Override
     public void sendMessage(String mensagem) {
         try {
-            server.messageToServer("Client Message");
+            String serverResponse = server.messageToServer("Client Message");
+            messageRecieved(serverResponse);
         } catch (Exception e) {
             e.printStackTrace();
         }
