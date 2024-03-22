@@ -1,7 +1,0 @@
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/interfaces/BaseCommunicationWithClientController.java
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/interfaces/RmiSendToServerRemoteInterface.java
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/interfaces/RmiSendToClientRemoteInterface.java
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/exceptions/NotInitializedException.java
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/ClientCommunicationRmiImpl.java
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/ChatController.java
-/home/ana/Prog_Distribuida_RPC-RMI/prog_distribuida_rpc_rmi_server/src/main/java/imd/ufrn/App.java
