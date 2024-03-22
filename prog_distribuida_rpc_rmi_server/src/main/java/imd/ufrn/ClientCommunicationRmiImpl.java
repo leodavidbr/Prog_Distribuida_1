@@ -7,13 +7,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.function.Function;
 
 import imd.ufrn.interfaces.BaseCommunicationWithClientController;
-import imd.ufrn.interfaces.RmiSendToClientRemoteInterface;
 import imd.ufrn.interfaces.RmiSendToServerRemoteInterface;
 
 public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientController
         implements RmiSendToServerRemoteInterface {
     private Registry registry;
-    private RmiSendToClientRemoteInterface server;
 
     public ClientCommunicationRmiImpl(Function<String, String> callbackFunctionMessageReceived) throws RemoteException {
         super(callbackFunctionMessageReceived);
@@ -33,15 +31,6 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
             e.printStackTrace();
         }
         return true;
-    }
-
-    @Override
-    public void sendMessage(String mensagem) {
-        try {
-            server.messageToClient(mensagem);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

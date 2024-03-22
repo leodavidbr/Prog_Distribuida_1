@@ -48,10 +48,6 @@ public class ChatController implements Runnable {
         return resourcesPath;
     }
 
-    public void handleSendMessageFromServer(String serverMessage) {
-        clientCommunicationController.sendMessage(serverMessage);
-    }
-
     public String handleMessageReceivedFromClient(String clientMessage) {
         String response = "";
         if ((clientMessage == null) || (clientMessage.length() < 1))

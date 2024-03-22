@@ -15,6 +15,4 @@ public abstract class BaseCommunicationWithClientController implements Runnable 
     }
 
     protected abstract boolean initialize();
-
-    public abstract void sendMessage(String mensagem);
 }

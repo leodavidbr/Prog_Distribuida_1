@@ -12,7 +12,6 @@ import imd.ufrn.interfaces.BaseInputReceiver;
 public class ChatController {
     BaseCommunicationWithServerController serverCommunicationController; // Maybe there's no need to save this
     BaseInputReceiver inputReceiver; // Maybe there's no need to save this
-    Thread serverCommunicationControllerThread;
     Thread inputRecieverThread;
     IChatPresenter chatPresenter;
 
@@ -23,9 +22,7 @@ public class ChatController {
                 message -> handleSendMessageFromClient(message));
         chatPresenter = new ChatPresenterTerminalImpl();
 
-        serverCommunicationControllerThread = new Thread(serverCommunicationController);
         inputRecieverThread = new Thread(inputReceiver);
-        serverCommunicationControllerThread.start();
         inputRecieverThread.start();
     }
 
