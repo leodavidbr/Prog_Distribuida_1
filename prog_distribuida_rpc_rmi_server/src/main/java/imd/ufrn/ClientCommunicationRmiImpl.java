@@ -16,7 +16,6 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     public ClientCommunicationRmiImpl(Function<String, String> callbackFunctionMessageReceived) throws RemoteException {
         super(callbackFunctionMessageReceived);
         initialize();
-        System.out.println("communication initialized");
     }
 
     @Override
