@@ -20,10 +20,6 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
     }
 
     @Override
-    public void run() {
-    }
-
-    @Override
     protected boolean initialize() {
         try {
             createStubAndBind();

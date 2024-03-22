@@ -35,8 +35,6 @@ public class ChatController implements Runnable {
     @Override
     public void run() {
         this.initialize();
-
-        clientCommunicationController.run();
     }
 
     private static String getResourcesPath() {
