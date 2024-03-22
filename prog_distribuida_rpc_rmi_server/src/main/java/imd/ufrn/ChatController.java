@@ -10,12 +10,14 @@ import org.alicebot.ab.MagicStrings;
 
 import imd.ufrn.interfaces.BaseCommunicationWithClientController;
 
-public class ChatController implements Runnable {
+public class ChatController {
     private static final boolean TRACE_MODE = false;
     private BaseCommunicationWithClientController clientCommunicationController;
     Chat chatSession;
 
     public ChatController() {
+        this.initialize();
+
         try {
             clientCommunicationController = new ClientCommunicationRmiImpl(
                     clientMessage -> handleMessageReceivedFromClient(clientMessage));
@@ -30,11 +32,6 @@ public class ChatController implements Runnable {
         Bot bot = new Bot("super", resourcesPath);
         chatSession = new Chat(bot);
         bot.brain.nodeStats();
-    }
-
-    @Override
-    public void run() {
-        this.initialize();
     }
 
     private static String getResourcesPath() {

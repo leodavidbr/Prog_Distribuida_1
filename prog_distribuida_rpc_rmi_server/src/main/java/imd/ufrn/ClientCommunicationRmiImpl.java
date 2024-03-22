@@ -37,7 +37,7 @@ public class ClientCommunicationRmiImpl extends BaseCommunicationWithClientContr
         return botResponse;
     }
 
-    public void createStubAndBind() throws RemoteException {
+    private void createStubAndBind() throws RemoteException {
 
         RmiSendToServerRemoteInterface stub = (RmiSendToServerRemoteInterface) UnicastRemoteObject
                 .exportObject((RmiSendToServerRemoteInterface) this, 0);
